@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
+import './dimensions.dart';
 
 class Layout extends StatelessWidget {
-  const Layout({super.key});
+  const Layout(
+      {super.key,
+      required this.mobileScreenLayout,
+      required this.webScreenLayout});
+  final Widget mobileScreenLayout;
+  final Widget webScreenLayout;
 
   @override
   Widget build(BuildContext context) {
+    print("layout Build");
     return LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth > 600) {
-        return Container(
-          width: 200,
-          height: 200,
-          color: Colors.blueAccent,
-        );
+      print("I'm in builder body ");
+      if (constraints.maxWidth > webScreenSize) {
+        return webScreenLayout;
       } else {
-        return Container(
-          width: 200,
-          height: 200,
-          color: Colors.amber,
-        );
+        return mobileScreenLayout;
       }
     });
   }
