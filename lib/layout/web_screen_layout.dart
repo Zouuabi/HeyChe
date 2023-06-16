@@ -5,10 +5,14 @@ class WebScreenLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("web build");
-    return const Scaffold(
+    double width = MediaQuery.of(context).size.width;
+
+    return Scaffold(
       body: Center(
-        child: Text("Web"),
+        child: Text(
+          "Web",
+          style: TextStyle(fontSize: width * 0.1),
+        ),
       ),
     );
   }

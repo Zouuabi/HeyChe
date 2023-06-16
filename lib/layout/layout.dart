@@ -11,9 +11,9 @@ class Layout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("layout Build");
+  
     return LayoutBuilder(builder: (context, constraints) {
-      print("I'm in builder body ");
+      
       if (constraints.maxWidth > webScreenSize) {
         return webScreenLayout;
       } else {
