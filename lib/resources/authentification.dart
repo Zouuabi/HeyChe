@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
-import '../backend/storage.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:social_media_app/models/user.dart' as m;
+import 'package:social_media_app/resources/storage.dart';
 
 class Auth {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -27,16 +27,15 @@ class Auth {
           await Storage().uploadImageToStorage('profilePics', file, false);
 
       String uid = cred.user!.uid;
-
-      _firestore.collection('users').doc(uid).set({
-        'username': username,
-        'uid': uid,
-        'email': email,
-        'bio': bio,
-        'followers': [],
-        'following': [],
-        'profileUrl': photoUrl
-      });
+      m.User user = m.User(
+          username: username,
+          uid: uid,
+          email: email,
+          bio: bio,
+          profileUrl: photoUrl,
+          followers: [],
+          following: []);
+      _firestore.collection('users').doc(uid).set(user.getUserInfo());
 
       status = 'Success';
     } on FirebaseAuthException catch (e) {
@@ -52,6 +51,7 @@ class Auth {
       // }
       status = e.message.toString();
     }
+
     return status;
   }
 
@@ -64,11 +64,16 @@ class Auth {
             email: email, password: password);
         status = 'Success';
       } else {
-        status = 'Enter your email and password';
+        status = "dakhel adress w mot de pass makhyeb rasek ";
       }
     } on FirebaseAuthException catch (e) {
       status = e.message.toString();
     }
+
     return status;
+  }
+
+  signUserOut() async {
+    await _auth.signOut();
   }
 }

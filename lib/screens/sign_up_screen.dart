@@ -1,14 +1,17 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
+import 'package:social_media_app/screens/login_screen.dart';
 
-import '../backend/img_picker.dart';
+import '../resources/img_picker.dart';
 import '../components/notify_user_with_msg.dart';
 import '../components/text_field.dart';
-import '../backend/authentification.dart';
+import '../resources/authentification.dart';
+import 'feed_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+  static const String id = 'SignUpScreen';
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -27,6 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() {
       _image = img;
     });
+    return; 
   }
 
   signUpUser(BuildContext ctx) async {
@@ -46,6 +50,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       });
       // ignore: use_build_context_synchronously
       notifyUserWithMsg(ctx, status);
+    } else {
+      await Auth().singInUser(
+          email: _emailController.text, password: _passwordController.text);
+      Navigator.of(context).pushReplacementNamed(FeedScreen.id);
     }
   }
 
@@ -61,7 +69,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           leading: IconButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, 'loginScreen');
+              Navigator.pushReplacementNamed(context, LoginScreen.id);
             },
             icon: const Icon(
               Icons.arrow_back_ios,
@@ -138,7 +146,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     hintText: 'Enter your password',
                     keyboardType: TextInputType.visiblePassword,
                     textController: _passwordController,
-                    ispassword: true,
+                    isPassword: true,
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(

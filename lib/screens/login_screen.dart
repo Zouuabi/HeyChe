@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:social_media_app/components/notify_user_with_msg.dart';
-import '../backend/authentification.dart';
+import 'package:social_media_app/screens/feed_screen.dart';
+import '../resources/authentification.dart';
 
 import '../components/text_field.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const String id = 'LoginScreen';
   const LoginScreen({super.key});
 
   @override
@@ -20,13 +22,20 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       loadingLogin = true;
     });
+
+    
     String status = await Auth().singInUser(
         email: _emailController.text, password: _passwordController.text);
+
     if (status != 'Success') {
       setState(() {
         loadingLogin = false;
       });
+      // ignore: use_build_context_synchronously
       notifyUserWithMsg(context, status);
+    } else {
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pushReplacementNamed(FeedScreen.id);
     }
   }
 
@@ -56,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     // email field
                     TextFieldInput(
                         icon: Icons.email_outlined,
-                        hintText: 'you@example.com',
+                        hintText: 'Enter your email',
                         keyboardType: TextInputType.emailAddress,
                         textController: _emailController),
 
@@ -67,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextFieldInput(
                       icon: Icons.key,
                       hintText: 'password',
-                      ispassword: true,
+                      isPassword: true,
                       keyboardType: TextInputType.visiblePassword,
                       textController: _passwordController,
                     ),

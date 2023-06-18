@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'screens/feed_screen.dart';
+import 'screens/login_screen.dart';
 
-import 'package:social_media_app/screens/sign_up_screen.dart';
+
 
 import 'firebase_options.dart';
+import 'screens/sign_up_screen.dart';
 // import 'layout/layout.dart';
 // import 'layout/mobile_screen_layout.dart';
 // import 'layout/web_screen_layout.dart';
-import 'screens/login_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,11 +31,13 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        initialRoute: 'loginScreen',
+        initialRoute: LoginScreen.id,
         routes: {
-          'loginScreen': (context) => const LoginScreen(),
-          'SignUpScreen': (context) => const SignUpScreen(),
+          LoginScreen.id: (context) => const LoginScreen(),
+          SignUpScreen.id: (context) => const SignUpScreen(),
+          FeedScreen.id: (context) => const FeedScreen(),
         });
+        
     // home: const Layout(
     //   mobileScreenLayout: MobileScreenLayout(),
     //   webScreenLayout: WebScreenLayout(),
