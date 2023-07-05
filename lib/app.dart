@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:social_media_app/core/utils/app_colors.dart';
 
@@ -7,7 +7,7 @@ import 'package:social_media_app/core/utils/app_strings.dart';
 
 import 'presentation/authentification/login_screen.dart';
 import 'presentation/authentification/sign_up_screen.dart';
-import 'presentation/feed/feed_screen.dart';
+import 'presentation/main/main_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: AppStrings.appName,
         theme: ThemeData(
-          bottomAppBarTheme: const BottomAppBarTheme(color: AppColors.primaryColor),
+          bottomAppBarTheme:
+              const BottomAppBarTheme(color: AppColors.primaryColor),
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
-                return const LoginScreen();
+                return const MainScreen();
               } else if (snapshot.hasError) {
                 return const Center(
                   child: Text('there is an eroor'),
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
         routes: {
           LoginScreen.id: (context) => const LoginScreen(),
           SignUpScreen.id: (context) => const SignUpScreen(),
-          FeedScreen.id: (context) => const FeedScreen(),
+          MainScreen.id: (context) => const MainScreen(),
         });
 
     // home: const Layout(

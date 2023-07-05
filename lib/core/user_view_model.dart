@@ -4,17 +4,16 @@ import 'package:social_media_app/data/authentification.dart';
 import 'package:social_media_app/domain/model/user.dart';
 
 class UserViewModel with ChangeNotifier {
-  
-
+  UserViewModel() {
+    getUserInfoFromFirebase();
+  }
   final Auth _auth = Auth();
-  bool isActive = false ; 
+  bool isActive = false;
 
   User? _user;
 
-  void signeIn(){
-    
-  }
-
+  void signeIn() {}
+  User userInfo() => _user!;
   Map<String, dynamic> tojson({required User user}) {
     return {
       'username': user.username,
@@ -40,7 +39,7 @@ class UserViewModel with ChangeNotifier {
         isActive: json["isActive"]);
   }
 
-  Future<User> getUserInfo() async {
+  Future<User> getUserInfoFromFirebase() async {
     DocumentSnapshot<Map<String, dynamic>> user = await _auth.getUserDetails();
 
     _user = fromJson(json: user);
@@ -51,6 +50,4 @@ class UserViewModel with ChangeNotifier {
   void signOut() async {
     await _auth.signUserOut();
   }
-
-
 }

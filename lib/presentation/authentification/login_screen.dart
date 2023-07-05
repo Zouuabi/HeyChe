@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:social_media_app/core/utils/app_images.dart';
-import 'package:social_media_app/presentation/feed/feed_screen.dart';
+import 'package:social_media_app/presentation/main/main_screen.dart';
 import '../shared.dart';
 import '../../data/authentification.dart';
 
@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
       notifyUserWithMsg(context, status);
     } else {
       // ignore: use_build_context_synchronously
-      Navigator.of(context).pushReplacementNamed(FeedScreen.id);
+      Navigator.of(context).pushReplacementNamed(MainScreen.id);
     }
   }
 
@@ -104,8 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           StandardTextButton(
                             label: 'Sign Up',
                             onPressed: () {
-                              Navigator.pushNamed(
-                                  context, 'SignUpScreen');
+                              Navigator.pushNamed(context, 'SignUpScreen');
                             },
                           )
                         ],

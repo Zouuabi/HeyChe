@@ -6,8 +6,7 @@ import 'package:social_media_app/presentation/shared.dart';
 
 import '../../data/authentification.dart';
 import '../../core/img_picker.dart';
-import '../feed/feed_screen.dart';
-import 'login_screen.dart';
+import '../main/main_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -54,7 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       await Auth().singInUser(
           email: _emailController.text, password: _passwordController.text);
       // ignore: use_build_context_synchronously
-      Navigator.of(context).pushReplacementNamed(FeedScreen.id);
+      Navigator.of(context).pushReplacementNamed(MainScreen.id);
     }
   }
 
