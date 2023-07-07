@@ -1,92 +1,54 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MainScreen extends StatefulWidget {
+import 'package:provider/provider.dart';
+
+import 'package:social_media_app/presentation/main/main_screen_provider.dart';
+
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:social_media_app/presentation/resources/app_images.dart';
+
+class MainScreen extends StatelessWidget {
   static const String id = 'FeedScreen';
-  const MainScreen({super.key});
+  MainScreen({super.key});
 
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int currentIndex = 0;
-  final PageController pageController =
-      PageController(initialPage: 0, keepPage: true);
-  List<BottomNavigationBarItem> barItems = const [
+  final List<BottomNavigationBarItem> barItems = [
     BottomNavigationBarItem(
-      icon: Icon(Icons.home_sharp),
+      icon: SvgPicture.asset(AppImages.home),
       label: '',
     ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.search),
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.notifications_none_sharp),
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.person),
-    ),
+    BottomNavigationBarItem(icon: SvgPicture.asset(AppImages.stories)),
+    BottomNavigationBarItem(icon: SvgPicture.asset(AppImages.notifications)),
+    BottomNavigationBarItem(icon: SvgPicture.asset(AppImages.search)),
   ];
-  var pages = [
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.red,
-    ),
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.green,
-    ),
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.blue,
-    ),
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.white,
-    ),
-  ];
-  void onPageChanged(int value) {
-    setState(() {
-      currentIndex = value;
-    });
-    pageController.animateToPage(value,
-        duration: const Duration(milliseconds: 250), curve: Curves.bounceInOut);
-  }
-
-  void onItemTaped(int value) {
-    setState(() {
-      currentIndex = value;
-    });
-    pageController.jumpToPage(value);
-  }
-
+  final MainProvider _mainProvider = MainProvider();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: Align(
-        alignment: Alignment.bottomCenter,
-        child: FloatingActionButton(
-          onPressed: () {},
-          child: const Icon(Icons.camera_alt_outlined),
-        ),
-      ),
-      bottomNavigationBar: CupertinoTabBar(
-        activeColor: Colors.blueAccent,
-        inactiveColor: Colors.grey.shade500,
-        currentIndex: currentIndex,
-        height: 60,
-        onTap: onItemTaped,
-        items: barItems,
-      ),
-      body: PageView(
-          controller: pageController,
-          onPageChanged: onPageChanged,
-          children: pages),
+    return ChangeNotifierProvider(
+      create: (context) => _mainProvider,
+      builder: (ctx, _) {
+        return Consumer<MainProvider>(
+          builder: (ctx, mainprovider, _) {
+            return Scaffold(
+              bottomNavigationBar: Container(
+                decoration: const BoxDecoration(boxShadow: [
+                  BoxShadow(color: Colors.grey, spreadRadius: 1, blurRadius: 6)
+                ]),
+                child: CupertinoTabBar(
+                  currentIndex: mainprovider.currentIndex,
+                  height: 60,
+                  onTap: mainprovider.onItemTaped,
+                  items: barItems,
+                ),
+              ),
+              body: PageView(
+                  controller: mainprovider.pageController,
+                  onPageChanged: mainprovider.onPageChanged,
+                  children: mainprovider.pages),
+            );
+          },
+        );
+      },
     );
   }
 }

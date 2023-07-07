@@ -1,12 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:social_media_app/core/utils/app_images.dart';
-import 'package:social_media_app/presentation/shared.dart';
+
+import 'package:social_media_app/presentation/shared/widgets/widgets.dart';
 
 import '../../data/authentification.dart';
-import '../../core/img_picker.dart';
+
 import '../main/main_screen.dart';
+import '../resources/app_images.dart';
+import '../resources/img_picker.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

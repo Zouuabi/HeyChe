@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:social_media_app/core/utils/app_images.dart';
+
 import 'package:social_media_app/presentation/main/main_screen.dart';
-import '../shared.dart';
+import '../resources/app_images.dart';
+import '../shared/widgets/widgets.dart';
 import '../../data/authentification.dart';
 
 // ! ephermal state so we better use satatefull widget
