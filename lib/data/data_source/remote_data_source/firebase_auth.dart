@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,6 +36,7 @@ class FirebaseAuthentication {
 
       status = 'Success';
     } on FirebaseAuthException catch (e) {
+      
       // if (e.code == 'invalid-email') {
       //   status = 'A samir yehdik rabi l\'email yabda hakka \n monji@gmail.com';
       // } else if (e.code == 'weak_password') {

@@ -1,15 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+import 'package:social_media_app/config/themes/themes.dart';
 
-import 'package:social_media_app/presentation/resources/app_strings.dart';
-
-import '../presentation/authentification/login_screen.dart';
-import '../presentation/authentification/sign_up_screen.dart';
-import '../presentation/main/main_screen.dart';
+import 'injector.dart';
+import 'presentation/login/pages/login_page.dart';
+import 'presentation/register/register.dart';
+import 'presentation/main/main_screen.dart';
+import 'core/utils/strings_manager.dart';
 
 class MyApp extends StatelessWidget {
-  // TODO : immigrate to Bloc pattern instead of provider 
+  // TODO : immigrate to Bloc pattern instead of provider
   // TODO : make profile screen Ui more responsive
   const MyApp({super.key});
 
@@ -17,12 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: AppStrings.appName,
-        theme: ThemeData(
-          useMaterial3: true,
-        ),
+        title: StringsManager.appName,
+        theme: applicationTheme(),
         home: StreamBuilder(
-          // TODO: seperate myapp root logic and firebase auth persistence 
+          // TODO: seperate myapp root logic and firebase auth persistence
           stream: FirebaseAuth.instance.userChanges(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
@@ -39,21 +38,23 @@ class MyApp extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             } else {
-              return const LoginScreen();
+              initLoginModule();
+              return LoginPage();
             }
           },
         ),
         routes: {
-          LoginScreen.id: (context) => const LoginScreen(),
-          SignUpScreen.id: (context) => const SignUpScreen(),
+          LoginPage.id: (context) {
+            initLoginModule();
+            return LoginPage();
+          },
+          RegisterScreen.id: (context) => const RegisterScreen(),
           MainScreen.id: (context) => MainScreen(),
         });
   }
 }
 
-
-
-// ! for later integration 
+// ! for later update
 class Layout extends StatelessWidget {
   const Layout(
       {super.key,

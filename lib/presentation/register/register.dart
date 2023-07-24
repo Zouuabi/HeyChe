@@ -1,23 +1,24 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:social_media_app/presentation/shared/widgets/text_field.dart';
 
 import 'package:social_media_app/presentation/shared/widgets/widgets.dart';
 
+import '../../core/utils/images_manager.dart';
+import '../../core/img_picker.dart';
 import '../../data/data_source/remote_data_source/firebase_auth.dart';
 
 import '../main/main_screen.dart';
-import '../resources/app_images.dart';
-import '../resources/img_picker.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
-  static const String id = 'SignUpScreen';
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+  static const String id = '/registerScreen';
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
@@ -94,7 +95,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return AppBar(
         centerTitle: true,
         title: Image.asset(
-          AppImages.logo,
+          ImagesManager.logo,
           width: 50,
           height: 50,
         ),
@@ -113,35 +114,44 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Column(
       children: [
         const SizedBox(height: 20),
-        TextFieldInput(
+        MyTextField(
+          errorMessage: 'df',
+          labelText: 'df',
           icon: null,
           hintText: 'Enter your username',
           keyboardType: TextInputType.text,
-          textController: _usernameController,
+          controller: _usernameController,
           isPassword: false,
         ),
         const SizedBox(height: 20),
-        TextFieldInput(
+        MyTextField(
+          labelText: 'sfd',
+          errorMessage: 'dffg',
           icon: null,
           hintText: 'Enter your email',
           keyboardType: TextInputType.emailAddress,
-          textController: _emailController,
+          controller: _emailController,
           isPassword: false,
         ),
         const SizedBox(height: 20),
-        TextFieldInput(
+        MyTextField(
+          labelText: 'bio',
+          errorMessage: 'bio',
           icon: null,
           hintText: 'Enter your Bio',
           keyboardType: TextInputType.text,
-          textController: _bioController,
+          controller: _bioController,
           isPassword: false,
         ),
         const SizedBox(height: 20),
-        TextFieldInput(
+        MyTextField(
+          isError: false,
+          labelText: 'password',
+          errorMessage: 'password required',
           icon: null,
           hintText: 'Enter your password',
           keyboardType: TextInputType.visiblePassword,
-          textController: _passwordController,
+          controller: _passwordController,
           isPassword: true,
         ),
         const SizedBox(height: 20),

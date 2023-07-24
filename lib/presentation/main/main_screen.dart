@@ -6,8 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:social_media_app/presentation/main/main_screen_provider.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:social_media_app/presentation/resources/app_images.dart';
+
 import 'package:social_media_app/presentation/shared/providers/user_provider.dart';
+
+import '../../core/utils/images_manager.dart';
 
 class MainScreen extends StatelessWidget {
   static const String id = 'FeedScreen';
@@ -16,16 +18,17 @@ class MainScreen extends StatelessWidget {
   final List<BottomNavigationBarItem> barItems = [
     BottomNavigationBarItem(
       icon: SvgPicture.asset(
-        AppImages.home,
+        ImagesManager.home,
       ),
       label: '',
     ),
     BottomNavigationBarItem(
         icon: SvgPicture.asset(
-      AppImages.stories,
+      ImagesManager.stories,
     )),
-    BottomNavigationBarItem(icon: SvgPicture.asset(AppImages.notifications)),
-    BottomNavigationBarItem(icon: SvgPicture.asset(AppImages.search)),
+    BottomNavigationBarItem(
+        icon: SvgPicture.asset(ImagesManager.notifications)),
+    BottomNavigationBarItem(icon: SvgPicture.asset(ImagesManager.search)),
   ];
   @override
   Widget build(BuildContext context) {

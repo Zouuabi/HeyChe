@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' show UserCredential;
 
-import 'package:social_media_app/app/network_failure/failure.dart';
+import 'package:social_media_app/core/failure/failure.dart';
 import 'package:social_media_app/domain/repositories/repository.dart';
 import 'package:social_media_app/domain/use_cases/base_use_case.dart';
 

@@ -1,8 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-
-import '../../resources/app_colors.dart';
+import 'package:social_media_app/core/utils/color_manager.dart';
 
 // !! this must be changed
 notifyUserWithMsg(BuildContext context, String msg) {
@@ -27,64 +26,6 @@ notifyUserWithMsg(BuildContext context, String msg) {
       });
 }
 
-class TextFieldInput extends StatefulWidget {
-  const TextFieldInput({
-    super.key,
-    required this.icon,
-    required this.hintText,
-    required this.isPassword,
-    required this.keyboardType,
-    required this.textController,
-  });
-  final IconData? icon;
-  final String hintText;
-  final TextInputType keyboardType;
-  final TextEditingController textController;
-  final bool isPassword;
-
-  @override
-  State<TextFieldInput> createState() => _TextFieldInputState();
-}
-
-class _TextFieldInputState extends State<TextFieldInput> {
-  late bool isPressed;
-
-  Widget showOrHidePasswor() {
-    return IconButton(
-      onPressed: () {
-        setState(() {
-          isPressed = isPressed ? false : true;
-        });
-      },
-      icon: Icon(
-        Icons.remove_red_eye_outlined,
-        color: isPressed ? Colors.purple : Colors.black,
-      ),
-    );
-  }
-
-  @override
-  void initState() {
-    isPressed = false;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      decoration: InputDecoration(
-        suffixIcon: widget.isPassword ? showOrHidePasswor() : null,
-        prefixIcon: Icon(widget.icon),
-        hintText: widget.hintText,
-        border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20))),
-      ),
-      keyboardType: widget.keyboardType,
-      obscureText: widget.isPassword ? !isPressed : false,
-      controller: widget.textController,
-    );
-  }
-}
 
 class StandardTextButton extends StatelessWidget {
   const StandardTextButton({
@@ -142,8 +83,8 @@ class ProfileImage extends StatelessWidget {
     return Stack(
       children: [
         Container(
-            decoration: const BoxDecoration(
-                shape: BoxShape.circle, color: AppColors.blue),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle, color: ColorManager.primary),
             width: 90,
             height: 90,
             child: image == null
@@ -162,9 +103,9 @@ class ProfileImage extends StatelessWidget {
           left: 45,
           child: IconButton(
             onPressed: onAdd,
-            icon: const Icon(
+            icon: Icon(
               Icons.add_a_photo,
-              color: AppColors.blue,
+              color: ColorManager.primary,
             ),
           ),
         )

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 
-import '../../app/network_failure/failure.dart';
+import '../../core/failure/failure.dart';
 
 
 

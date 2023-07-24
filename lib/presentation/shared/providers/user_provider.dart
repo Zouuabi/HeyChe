@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:social_media_app/data/data_source/remote_data_source/cloud_firestore.dart';
 import 'package:social_media_app/data/data_source/remote_data_source/firebase_auth.dart';
 import 'package:social_media_app/domain/entites/user.dart';
 
