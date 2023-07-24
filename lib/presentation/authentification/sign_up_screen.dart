@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:social_media_app/presentation/shared/widgets/widgets.dart';
 
-import '../../data/authentification.dart';
+import '../../data/data_source/remote_data_source/authentification.dart';
 
 import '../main/main_screen.dart';
 import '../resources/app_images.dart';

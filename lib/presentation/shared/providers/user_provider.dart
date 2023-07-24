@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:social_media_app/data/authentification.dart';
-import 'package:social_media_app/domain/model/user.dart';
+import 'package:social_media_app/data/data_source/remote_data_source/authentification.dart';
+import 'package:social_media_app/domain/entites/user.dart';
 
-class UserViewModel with ChangeNotifier {
-  UserViewModel() {
+class UserProvider with ChangeNotifier {
+  UserProvider() {
     getUserInfoFromFirebase();
   }
   final Auth _auth = Auth();
@@ -14,6 +14,7 @@ class UserViewModel with ChangeNotifier {
 
   void signeIn() {}
   User userInfo() => _user!;
+
   Map<String, dynamic> tojson({required User user}) {
     return {
       'username': user.username,
@@ -39,9 +40,10 @@ class UserViewModel with ChangeNotifier {
         isActive: json["isActive"]);
   }
 
-  Future<User> getUserInfoFromFirebase() async {
-    DocumentSnapshot<Map<String, dynamic>> user = await _auth.getUserDetails();
+  Future<User> getUserInfoFromFirebase()  async {
+    DocumentSnapshot<Map<String, dynamic>> data =  await _auth.getUserDetails();
 
+    var user = data; 
     _user = fromJson(json: user);
     notifyListeners();
     return _user!;
@@ -51,3 +53,99 @@ class UserViewModel with ChangeNotifier {
     await _auth.signUserOut();
   }
 }
+
+// class UserProvider extends ChangeNotifier {
+//   User? _user;
+//   bool _isLoading = false;
+
+//   User? get user => _user;
+//   bool get isLoading => _isLoading;
+
+//   Future<void> fetchUserDetails() async {
+//     try {
+//       _isLoading = true;
+//       notifyListeners();
+
+//       User? currentUser = _auth.currentUser;
+//       DocumentSnapshot<Map<String, dynamic>> snap =
+//           await _firestore.collection('users').doc(currentUser!.uid).get();
+//       _user = User.fromSnapshot(snap);
+
+//       _isLoading = false;
+//       notifyListeners();
+//     } catch (error) {
+//       // Handle any errors that occur during fetching user details
+//       _isLoading = false;
+//       notifyListeners();
+//       throw error;
+//     }
+//   }
+// }
+
+
+// class HomeScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     final userProvider = Provider.of<UserProvider>(context);
+
+//     return FutureBuilder(
+//       future: userProvider.fetchUserDetails(),
+//       builder: (context, snapshot) {
+//         if (snapshot.connectionState == ConnectionState.waiting) {
+//           return CircularProgressIndicator();
+//         } else if (snapshot.hasError) {
+//           return Text('Error: ${snapshot.error}');
+//         } else {
+//           // User details fetched successfully, display them
+//           final user = userProvider.user;
+
+//           return Column(
+//             children: [
+//               Text('Username: ${user.name}'),
+//               Text('Followers: ${user.followers.toString()}'),
+//             ],
+//           );
+//         }
+//       },
+//     );
+//   }
+// }
+
+
+/// [fdf ]fds sdf d fdfsd "dsfds " 'fdsf' @sdfds [Class] 
+/// 
+// class UserProvider extends ChangeNotifier {
+//   Stream<User> getUserDetails() {
+//     User? currentUser = _auth.currentUser;
+//     Stream<DocumentSnapshot<Map<String, dynamic>>> userSnapshotStream =
+//         _firestore.collection('users').doc(currentUser!.uid).snapshots();
+
+//     return userSnapshotStream.map((snapshot) => User.fromSnapshot(snapshot));
+//   }
+// }
+
+
+// class HomeScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamBuilder<User>(
+//       stream: Provider.of<UserProvider>(context).getUserDetails(),
+//       builder: (context, snapshot) {
+//         if (snapshot.connectionState == ConnectionState.waiting) {
+//           return CircularProgressIndicator();
+//         } else if (snapshot.hasError) {
+//           return Text('Error: ${snapshot.error}');
+//         } else {
+//           final user = snapshot.data!;
+
+//           return Column(
+//             children: [
+//               Text('Username: ${user.name}'),
+//               Text('Followers: ${user.followers.toString()}'),
+//             ],
+//           );
+//         }
+//       },
+//     );
+//   }
+// }

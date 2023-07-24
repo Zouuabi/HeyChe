@@ -1,27 +1,25 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show ChangeNotifier, PageController, Curves;
 import 'package:social_media_app/presentation/add_post/add_post.dart';
 import 'package:social_media_app/presentation/home/home_screen.dart';
 
 import '../profile/profile_screen.dart';
 
-class MainProvider with ChangeNotifier {
-  //!! have reset current index and intial to 0
-  int currentIndex = 3;
+class MainScreenProvider with ChangeNotifier {
+  int currentIndex = 0;
   final PageController pageController = PageController(
-    initialPage: 3,
+    initialPage: 0,
     keepPage: true,
   );
 
   var pages = [
     const HomeSCreen(),
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.green,
-    ),
+    const ProfileScreen(),
     const AddPostScreen(),
     const ProfileScreen(),
   ];
+
+  int get currentPage => currentIndex;
 
   void onPageChanged(int value) {
     currentIndex = value;

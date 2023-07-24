@@ -16,7 +16,7 @@ class AddPostScreen extends StatelessWidget {
         leading: TextButton(
             child: const Icon(Icons.arrow_back),
             onPressed: () {
-              Provider.of<MainProvider>(context, listen: false).goto(0);
+              Provider.of<MainScreenProvider>(context, listen: false).goto(0);
             }),
       ),
     );

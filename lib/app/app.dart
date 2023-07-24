@@ -9,6 +9,8 @@ import '../presentation/authentification/sign_up_screen.dart';
 import '../presentation/main/main_screen.dart';
 
 class MyApp extends StatelessWidget {
+  // TODO : immigrate to Bloc pattern instead of provider 
+  // TODO : make profile screen Ui more responsive
   const MyApp({super.key});
 
   @override
@@ -17,10 +19,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: AppStrings.appName,
         theme: ThemeData(
-        
           useMaterial3: true,
         ),
         home: StreamBuilder(
+          // TODO: seperate myapp root logic and firebase auth persistence 
           stream: FirebaseAuth.instance.userChanges(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
@@ -46,13 +48,12 @@ class MyApp extends StatelessWidget {
           SignUpScreen.id: (context) => const SignUpScreen(),
           MainScreen.id: (context) => MainScreen(),
         });
-
-    // home: const Layout(
-    //   mobileScreenLayout: MobileScreenLayout(),
-    //   webScreenLayout: WebScreenLayout(),
   }
 }
 
+
+
+// ! for later integration 
 class Layout extends StatelessWidget {
   const Layout(
       {super.key,

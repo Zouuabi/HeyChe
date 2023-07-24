@@ -10,12 +10,12 @@ class HomeSCreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: SizedBox(
-            height: 10,
-            width: 10,
-            child: SvgPicture.asset(
-              AppImages.messages,
-            )),
+        leading: Container(
+          padding: const EdgeInsets.all(10),
+          child: SvgPicture.asset(
+            AppImages.messages,
+          ),
+        ),
         title: Image.asset(AppImages.logo, height: 50),
         centerTitle: true,
         elevation: 2,
@@ -26,7 +26,10 @@ class HomeSCreen extends StatelessWidget {
                 // Navigate to search screen
                 //todo : implemetn this func bruh
               },
-              icon: const Icon(Icons.search))
+              icon: const Icon(
+                Icons.search,
+                size: 35,
+              ))
         ],
       ),
       body: Container(),

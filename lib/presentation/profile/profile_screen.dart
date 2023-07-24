@@ -1,6 +1,9 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../shared/providers/user_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -8,7 +11,9 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    List <Widget>dummyposts = [for (int i = 0; i < 1000; i++) Container(color: Colors.blueGrey,height: 100,width: 100,)];
 
+    
     return Scaffold(
       body: Stack(
         children: [
@@ -40,10 +45,10 @@ class ProfileScreen extends StatelessWidget {
                       topLeft: Radius.circular(50),
                       topRight: Radius.circular(50))),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'User Name',
+                    '${Provider.of<UserProvider>(context).getUserInfoFromFirebase()}',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -62,14 +67,8 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(
                     width: size.width,
                     height: 300,
-                    child: GridView.builder(
-                      itemBuilder: (context, index) {
-                        return Container(
-                          color: Colors.purple,
-                          height: 100,
-                          width: 100,
-                        );
-                      },
+                    child: GridView(
+                      children: dummyposts,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisSpacing: 5,
                         mainAxisSpacing: 5,
