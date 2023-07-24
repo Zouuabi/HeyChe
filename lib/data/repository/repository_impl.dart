@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' show UserCredential;
 
@@ -40,7 +42,31 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, UserCredential>> register() {
-    throw Error();
+  Future<Either<Failure, UserCredential>> register(String username,
+      String email, String password, Uint8List? photofile, String bio) async {
+    if (await _networkInfo.isConnected) {
+      String? photoUrl ;
+      try {
+        ///  if the user selected a photo from gallery 
+        ///  we Try to upload it to the Cloud 
+        /// else we register the user without photo
+
+        if(photofile!=null ){
+          photoUrl = await _cloudStorage.uploadImageToStorage('profilePics', photofile, false);
+        }
+        UserCredential cred = await _auth.registerUser(
+          email: email,
+          password: password,
+        );
+
+        await _cloudFirestore.registerNewUserInfo(
+            username, email, cred.user!.uid,bio,photoUrl??'');
+        return Right(cred);
+      } catch (error) {
+        return Left(ErrorHandler.handle(error));
+      }
+    } else {
+      return Left(Failure(failureMessage: 'No internet connection'));
+    }
   }
 }

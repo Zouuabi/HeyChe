@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_media_app/presentation/login/pages/login_page.dart';
-import 'package:social_media_app/presentation/register/register.dart';
+import 'package:social_media_app/presentation/register/pages/register_page.dart';
 
 class Routes {
   static const String splash = "/";
@@ -30,7 +30,7 @@ class RouteGenerator {
       case Routes.login:
         return MaterialPageRoute(builder: (_) => LoginPage());
       case Routes.register:
-        return MaterialPageRoute(builder: (_) => const RegisterScreen());
+        return MaterialPageRoute(builder: (_) => const RegisterPage());
       default:
         return unDefinedRoute();
     }

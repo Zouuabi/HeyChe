@@ -5,7 +5,7 @@ import 'package:social_media_app/config/themes/themes.dart';
 
 import 'injector.dart';
 import 'presentation/login/pages/login_page.dart';
-import 'presentation/register/register.dart';
+import 'presentation/register/pages/register_page.dart';
 import 'presentation/main/main_screen.dart';
 import 'core/utils/strings_manager.dart';
 
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
             initLoginModule();
             return LoginPage();
           },
-          RegisterScreen.id: (context) => const RegisterScreen(),
+          RegisterPage.id: (context) => const RegisterPage(),
           MainScreen.id: (context) => MainScreen(),
         });
   }

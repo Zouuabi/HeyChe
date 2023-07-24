@@ -22,8 +22,8 @@ class CloudFirestore {
     return snap;
   }
 
-  void registerNewUserInfo  (
-      String username, String bio, String email, String photoUrl,String uid ) async {
+  Future <void> registerNewUserInfo  (
+      String username,  String email,String uid,String bio,String photoUrl  ) async {
     await _firestore.collection('users').doc(uid).set({
       'username': username,
       'uid': uid,

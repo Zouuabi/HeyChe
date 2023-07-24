@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:social_media_app/presentation/login/cubit/login_cubit.dart';
 import 'package:social_media_app/presentation/main/main_screen.dart';
-import 'package:social_media_app/presentation/register/register.dart';
+import 'package:social_media_app/presentation/register/pages/register_page.dart';
 import 'package:social_media_app/presentation/shared/widgets/text_field.dart';
 
 import '../../../core/utils/images_manager.dart';
@@ -15,7 +15,7 @@ import '../../shared/widgets/error_alert.dart';
 import '../../shared/widgets/widgets.dart';
 
 class LoginPage extends StatelessWidget {
-  static const String id = 'LoginScreen';
+  static const String id = '/LoginPage';
   LoginPage({super.key});
 
   final LoginCubit _loginCubit = instance<LoginCubit>();
@@ -113,7 +113,7 @@ class LoginPage extends StatelessWidget {
                                   label: StringsManager.register,
                                   onPressed: () {
                                     Navigator.pushNamed(
-                                        context, RegisterScreen.id);
+                                        context, RegisterPage.id);
                                   },
                                 )
                               ],
