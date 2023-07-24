@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-
 import 'package:social_media_app/presentation/shared/widgets/widgets.dart';
 
-import '../../data/data_source/remote_data_source/authentification.dart';
+import '../../data/data_source/remote_data_source/firebase_auth.dart';
 
 import '../main/main_screen.dart';
 import '../resources/app_images.dart';
@@ -38,7 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() {
       loadingSignUp = true;
     });
-    String status = await Auth().signUpUser(
+    String status = await FirebaseAuthentication().registerUser(
         username: _usernameController.text,
         email: _emailController.text,
         password: _passwordController.text,
@@ -52,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       // ignore: use_build_context_synchronously
       notifyUserWithMsg(ctx, status);
     } else {
-      await Auth().singInUser(
+      await FirebaseAuthentication().singInUser(
           email: _emailController.text, password: _passwordController.text);
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacementNamed(MainScreen.id);

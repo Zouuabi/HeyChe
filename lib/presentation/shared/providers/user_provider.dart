@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:social_media_app/data/data_source/remote_data_source/authentification.dart';
+import 'package:social_media_app/data/data_source/remote_data_source/cloud_firestore.dart';
+import 'package:social_media_app/data/data_source/remote_data_source/firebase_auth.dart';
 import 'package:social_media_app/domain/entites/user.dart';
 
+@Deprecated("Bloc pattern must be used instead")
 class UserProvider with ChangeNotifier {
   UserProvider() {
-    getUserInfoFromFirebase();
+    // getUserInfoFromFirebase();
   }
-  final Auth _auth = Auth();
+  final FirebaseAuthentication _auth = FirebaseAuthentication();
   bool isActive = false;
 
   User? _user;
@@ -40,18 +42,19 @@ class UserProvider with ChangeNotifier {
         isActive: json["isActive"]);
   }
 
-  Future<User> getUserInfoFromFirebase()  async {
-    DocumentSnapshot<Map<String, dynamic>> data =  await _auth.getUserDetails();
+  // Future<User> getUserInfoFromFirebase() async {
+  //   DocumentSnapshot<Map<String, dynamic>> data =
+  //       await FirestoreDatabase(uid: _user!.uid).getUserDetails();
 
-    var user = data; 
-    _user = fromJson(json: user);
-    notifyListeners();
-    return _user!;
-  }
+  //   var user = data;
+  //   _user = fromJson(json: user);
+  //   notifyListeners();
+  //   return _user!;
+  // }
 
-  void signOut() async {
-    await _auth.signUserOut();
-  }
+  // void signOut() async {
+  //   await _auth.logOut();
+  // }
 }
 
 // class UserProvider extends ChangeNotifier {

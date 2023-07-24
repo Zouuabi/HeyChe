@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-class Storage {
+class CloudStorage {
   final FirebaseStorage _storage = FirebaseStorage.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -17,7 +17,7 @@ class Storage {
     UploadTask uploadTask = ref.putData(file);
 
     TaskSnapshot snap = await uploadTask;
-    
+
     String downloadUrl = await snap.ref.getDownloadURL();
     return downloadUrl;
   }

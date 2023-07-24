@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-
-import 'package:social_media_app/presentation/main/main_screen.dart';
 import '../resources/app_images.dart';
 import '../shared/widgets/widgets.dart';
-import '../../data/data_source/remote_data_source/authentification.dart';
+
 
 // ! ephermal state so we better use satatefull widget
 
@@ -21,25 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   bool loadingLogin = false;
 
-  void loginUser() async {
-    setState(() {
-      loadingLogin = true;
-    });
 
-    String status = await Auth().singInUser(
-        email: _emailController.text, password: _passwordController.text);
-
-    if (status != 'Success') {
-      setState(() {
-        loadingLogin = false;
-      });
-      // ignore: use_build_context_synchronously
-      notifyUserWithMsg(context, status);
-    } else {
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pushReplacementNamed(MainScreen.id);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       StandardButton(
                           onPressed: () {
-                            loginUser();
+                            
                           },
                           label: 'Login'),
                       const SizedBox(height: 20),

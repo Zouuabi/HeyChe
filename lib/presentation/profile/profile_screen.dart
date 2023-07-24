@@ -48,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${Provider.of<UserProvider>(context).getUserInfoFromFirebase()}',
+                    'sdfsdfsdf',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
