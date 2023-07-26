@@ -36,7 +36,7 @@ ThemeData applicationTheme() {
         splashColor: ColorManager.lightPrimary),
     // Text Button theme
     textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(primary: ColorManager.lightGrey),
+      style: TextButton.styleFrom(foregroundColor: ColorManager.lightGrey),
     ),
     // elevated button them
     elevatedButtonTheme: ElevatedButtonThemeData(

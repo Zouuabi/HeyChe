@@ -26,6 +26,7 @@ class RegisterationForm extends StatelessWidget {
       children: [
         const SizedBox(height: 20),
         MyTextField(
+          isError: false,
           errorMessage: 'df',
           labelText: StringsManager.username,
           icon: Icons.person_2_outlined,
@@ -36,6 +37,7 @@ class RegisterationForm extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         MyTextField(
+          isError: false,
           labelText: StringsManager.email,
           errorMessage: 'dffg',
           icon: Icons.email_outlined,
@@ -46,6 +48,7 @@ class RegisterationForm extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         MyTextField(
+          isError: false,
           labelText: StringsManager.bio,
           errorMessage: 'bio',
           icon: Icons.text_fields,

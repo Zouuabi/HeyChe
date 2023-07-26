@@ -23,7 +23,7 @@ class RepositoryImpl implements Repository {
       this._networkInfo, this._auth, this._cloudStorage, this._cloudFirestore);
 
   @override
-  Future<Either<Failure, UserCredential>> login(
+  Future<Either<Failure, void>> login(
       String email, String password) async {
     if (await _networkInfo.isConnected) {
       try {
@@ -32,7 +32,7 @@ class RepositoryImpl implements Repository {
 
         await _cloudFirestore.setUserActive(userCredential.user!.uid);
 
-        return Right(userCredential);
+        return const Right(null);
       } catch (error) {
         return Left(ErrorHandler.handle(error));
       }
@@ -42,26 +42,37 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  Future<Either<Failure, UserCredential>> register(String username,
-      String email, String password, Uint8List? photofile, String bio) async {
+  Future<Either<Failure, void >> register(
+      {required String username,
+      required String email,
+      required String password,
+      required Uint8List? photofile,
+      required String bio}) async {
     if (await _networkInfo.isConnected) {
-      String? photoUrl ;
+      String? photoUrl;
       try {
-        ///  if the user selected a photo from gallery 
-        ///  we Try to upload it to the Cloud 
+        ///  if the user selected a photo from gallery
+        ///  we Try to upload it to the Cloud
         /// else we register the user without photo
 
-        if(photofile!=null ){
-          photoUrl = await _cloudStorage.uploadImageToStorage('profilePics', photofile, false);
+        if (photofile != null) {
+          photoUrl = await _cloudStorage.uploadImageToStorage(
+              'profilePics', photofile, false);
         }
+
         UserCredential cred = await _auth.registerUser(
           email: email,
           password: password,
         );
 
         await _cloudFirestore.registerNewUserInfo(
-            username, email, cred.user!.uid,bio,photoUrl??'');
-        return Right(cred);
+            username: username,
+            email: email,
+            uid: cred.user!.uid,
+            bio: bio,
+            photoUrl: photoUrl ?? '');
+
+        return const Right(null);
       } catch (error) {
         return Left(ErrorHandler.handle(error));
       }

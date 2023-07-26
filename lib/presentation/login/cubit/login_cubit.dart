@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart' show TextEditingController;
+
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart' show UserCredential;
-import 'package:flutter/material.dart' show TextEditingController;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:social_media_app/core/failure/failure.dart';
+import 'package:social_media_app/core/utils/strings_manager.dart';
 import 'package:social_media_app/domain/use_cases/login_use_cases.dart';
 
 part 'login_state.dart';
@@ -23,19 +24,20 @@ class LoginCubit extends Cubit<LoginState> {
     bool flag = false;
     if (_emailController.text.isEmpty) {
       flag = true;
-      emit(const TextFieldEmpty(status: 'email'));
+      emit(const TextFieldEmpty(status: StringsManager.email));
     }
     if (_passwordController.text.isEmpty) {
       flag = true;
-      emit(const TextFieldEmpty(status: 'password'));
+      emit(const TextFieldEmpty(status: StringsManager.password));
     }
     return flag;
   }
 
   Future<void> login() async {
-    emit(LoginLoading());
+    emit(LoginInitial());
     if (_checkInput()) return;
-    Either<Failure, UserCredential> result = await _loginUseCase.execute(
+    emit(LoginLoading());
+    Either<Failure, void> result = await _loginUseCase.execute(
         LoginUseCaseInput(
             email: _emailController.text, password: _passwordController.text));
     emit(

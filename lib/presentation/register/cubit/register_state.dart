@@ -8,3 +8,13 @@ abstract class RegisterState extends Equatable {
 }
 
 class RegisterInitial extends RegisterState {}
+
+class RegisterLoading extends RegisterState {}
+
+class RegisterComplete extends RegisterState {}
+
+class RegisterError extends RegisterState {
+  final String message;
+
+  const RegisterError({required this.message});
+}

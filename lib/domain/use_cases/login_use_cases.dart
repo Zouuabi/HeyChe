@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart' show UserCredential;
 
 import 'package:social_media_app/core/failure/failure.dart';
 import 'package:social_media_app/domain/repositories/repository.dart';
@@ -12,13 +11,12 @@ class LoginUseCaseInput {
   LoginUseCaseInput({required this.email, required this.password});
 }
 
-class LoginUseCase implements BaseUseCase<LoginUseCaseInput, UserCredential> {
+class LoginUseCase implements BaseUseCase<LoginUseCaseInput, void> {
   LoginUseCase(this._repository);
   final Repository _repository;
 
   @override
-  Future<Either<Failure, UserCredential>> execute(
-      LoginUseCaseInput input) async {
+  Future<Either<Failure, void>> execute(LoginUseCaseInput input) async {
     return await _repository.login(input.email, input.password);
   }
 }

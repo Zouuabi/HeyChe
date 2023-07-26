@@ -1,9 +1,8 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../shared/providers/user_provider.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

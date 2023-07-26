@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase show User;
 part 'models.g.dart';
 
 @JsonSerializable()
@@ -37,8 +38,17 @@ class User {
   @JsonKey(name: 'isActive')
   final bool? isActive;
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory User.fromFirebaseUser(firebase.User firebaseUser) {
+    return User(
+        username: firebaseUser.displayName,
+        uid: firebaseUser.uid,
+        email: firebaseUser.email,
+        profileUrl: firebaseUser.photoURL,
+        bio: '',
+        followers: [],
+        following: [],
+        isActive: null);
+  }
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
-
 }

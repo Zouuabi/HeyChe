@@ -30,7 +30,7 @@ class RouteGenerator {
       case Routes.login:
         return MaterialPageRoute(builder: (_) => LoginPage());
       case Routes.register:
-        return MaterialPageRoute(builder: (_) => const RegisterPage());
+        return MaterialPageRoute(builder: (_) => RegisterPage());
       default:
         return unDefinedRoute();
     }

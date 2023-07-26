@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:social_media_app/config/themes/themes.dart';
+import 'package:social_media_app/data/data_source/remote_data_source/firebase_auth.dart';
 
 import 'injector.dart';
 import 'presentation/login/pages/login_page.dart';
@@ -10,8 +11,6 @@ import 'presentation/main/main_screen.dart';
 import 'core/utils/strings_manager.dart';
 
 class MyApp extends StatelessWidget {
-  // TODO : immigrate to Bloc pattern instead of provider
-  // TODO : make profile screen Ui more responsive
   const MyApp({super.key});
 
   @override
@@ -45,10 +44,12 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           LoginPage.id: (context) {
-            initLoginModule();
             return LoginPage();
           },
-          RegisterPage.id: (context) => const RegisterPage(),
+          RegisterPage.id: (context) {
+            initRegisterModule();
+            return RegisterPage();
+          },
           MainScreen.id: (context) => MainScreen(),
         });
   }

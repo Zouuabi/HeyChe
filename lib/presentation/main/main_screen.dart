@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, deprecated_member_use_from_same_package
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,9 +9,10 @@ import 'package:social_media_app/presentation/main/main_screen_provider.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'package:social_media_app/presentation/shared/providers/user_provider.dart';
+
 
 import '../../core/utils/images_manager.dart';
+import '../shared/providers/user_provider.dart';
 
 class MainScreen extends StatelessWidget {
   static const String id = 'FeedScreen';

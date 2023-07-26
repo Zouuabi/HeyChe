@@ -1,12 +1,15 @@
 import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart' show UserCredential;
 
 import '../../core/failure/failure.dart';
 
 abstract class Repository {
-  Future<Either<Failure, UserCredential>> login(String email, String password);
-  Future<Either<Failure, UserCredential>> register(String username,
-      String email, String password, Uint8List photoFile, String bio);
+  Future<Either<Failure, void>> login(String email, String password);
+  Future<Either<Failure, void>> register(
+      {required String username,
+      required String email,
+      required String password,
+      required Uint8List? photofile,
+      required String bio});
 }

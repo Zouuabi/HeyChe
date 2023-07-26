@@ -8,9 +8,16 @@ import 'package:social_media_app/data/data_source/remote_data_source/firebase_au
 import 'package:social_media_app/data/repository/repository_impl.dart';
 import 'package:social_media_app/domain/repositories/repository.dart';
 import 'package:social_media_app/domain/use_cases/login_use_cases.dart';
+import 'package:social_media_app/domain/use_cases/register_use_case.dart';
 import 'package:social_media_app/presentation/login/cubit/login_cubit.dart';
+import 'package:social_media_app/presentation/register/cubit/register_cubit.dart';
 
 final instance = GetIt.instance;
+
+
+/// there is no need to manually configurating Firebase services instances  singletons since 
+/// since it is already handled when calling  [Firebase.InitializeApp] 
+/// Just making use of the service locator pattern 
 
 Future<void> initCoreModue() async {
   instance.registerLazySingleton<NetworkInfo>(() =>
@@ -33,5 +40,14 @@ void initLoginModule() {
   if (!GetIt.I.isRegistered<LoginUseCase>()) {
     instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
     instance.registerFactory<LoginCubit>(() => LoginCubit(instance()));
+  }
+}
+
+void initRegisterModule() {
+  if (!GetIt.I.isRegistered<RegisterUseCase>()) {
+    instance
+        .registerFactory<RegisterUseCase>(() => RegisterUseCase(instance<Repository>()));
+
+    instance.registerFactory<RegisterCubit>(() => RegisterCubit(instance<RegisterUseCase>()));
   }
 }

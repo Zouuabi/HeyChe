@@ -5,17 +5,23 @@ import '../../../core/utils/color_manager.dart';
 import '../../../core/utils/styles_manager.dart';
 import '../../../core/utils/values_manager.dart';
 
-class ErrorAlert extends StatelessWidget {
-  const ErrorAlert({
+class MyAlert extends StatelessWidget {
+  const MyAlert({
     super.key,
     required this.message,
+    required this.title,
+    required this.actionText,
+    this.action,
   });
   final String message;
+  final String title;
+  final String actionText;
+  final VoidCallback? action;
   @override
   Widget build(BuildContext context) {
     return CupertinoAlertDialog(
       title: Text(
-        'Eroor! ',
+        title,
         style: getSemiBoldStyle(
             color: ColorManager.primary, fontSize: AppSize.s20),
       ),
@@ -25,11 +31,12 @@ class ErrorAlert extends StatelessWidget {
       ),
       actions: [
         ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+            onPressed: action ??
+                () {
+                  Navigator.of(context).pop();
+                },
             child: Text(
-              "Try Again",
+              actionText,
               style: getRegularStyle(color: ColorManager.primary),
             ))
       ],

@@ -14,7 +14,7 @@ class Alert extends StatelessWidget {
       color: Colors.blue,
       height: 100,
       width: 50,
-      child: Text('Error'),
+      child: const Text('Error'),
     );
   }
 }

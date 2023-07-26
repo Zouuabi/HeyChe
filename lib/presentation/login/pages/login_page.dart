@@ -11,7 +11,7 @@ import 'package:social_media_app/presentation/shared/widgets/text_field.dart';
 import '../../../core/utils/images_manager.dart';
 import '../../../core/utils/strings_manager.dart';
 import '../../../injector.dart';
-import '../../shared/widgets/error_alert.dart';
+import '../../shared/widgets/alert.dart';
 import '../../shared/widgets/widgets.dart';
 
 class LoginPage extends StatelessWidget {
@@ -31,12 +31,14 @@ class LoginPage extends StatelessWidget {
             child: BlocConsumer<LoginCubit, LoginState>(
               listener: (context, state) {
                 if (state is LoginLoaded) {
-                  Navigator.pushNamed(context, MainScreen.id);
+                  Navigator.pushReplacementNamed(context, MainScreen.id);
                 } else if (state is LoginError) {
                   showCupertinoModalPopup(
                       context: context,
                       builder: (context) {
-                        return ErrorAlert(
+                        return MyAlert(
+                          title: 'Error !',
+                          actionText: 'Try again',
                           message: state.message,
                         );
                       });
@@ -112,7 +114,8 @@ class LoginPage extends StatelessWidget {
                                 StandardTextButton(
                                   label: StringsManager.register,
                                   onPressed: () {
-                                    Navigator.pushNamed(
+                                    
+                                    Navigator.pushReplacementNamed(
                                         context, RegisterPage.id);
                                   },
                                 )

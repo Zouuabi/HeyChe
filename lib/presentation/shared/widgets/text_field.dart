@@ -12,7 +12,7 @@ class MyTextField extends StatefulWidget {
     required this.controller,
     required this.hintText,
     this.isPassword = false,
-    this.isError = false,
+    required this.isError 
   });
   final IconData? icon;
   final bool isError;
