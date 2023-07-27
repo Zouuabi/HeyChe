@@ -26,13 +26,6 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-@override
-void initState() {
-  //! just for testing 
-  // this is for the dependency injection
-  // initRegisterModule();
-}
-
 class _RegisterPageState extends State<RegisterPage> {
   final RegisterCubit _registerCubit = instance<RegisterCubit>();
 
@@ -126,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, LoginPage.id);
+            Navigator.pushReplacementNamed(context, Routes.login);
           },
           icon: Icon(
             Icons.arrow_back_ios,

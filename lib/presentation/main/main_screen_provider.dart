@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart'
     show ChangeNotifier, PageController, Curves;
-import 'package:social_media_app/presentation/add_post/add_post.dart';
-import 'package:social_media_app/presentation/home/home_screen.dart';
+import 'package:social_media_app/presentation/main/add_post/add_post.dart';
+import 'package:social_media_app/presentation/main/home/home_screen.dart';
 
-import '../profile/profile_screen.dart';
+import 'profile/profile_screen.dart';
 
 class MainScreenProvider with ChangeNotifier {
   int currentIndex = 0;

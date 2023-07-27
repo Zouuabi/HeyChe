@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../core/utils/images_manager.dart';
-import '../../data/data_source/remote_data_source/firebase_auth.dart';
+import '../../../core/utils/images_manager.dart';
+import '../../../data/data_source/remote_data_source/firebase_auth.dart';
 
 class HomeSCreen extends StatelessWidget {
   const HomeSCreen({super.key});

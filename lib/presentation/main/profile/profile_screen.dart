@@ -1,8 +1,7 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-
-
+import 'package:social_media_app/core/utils/images_manager.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -10,9 +9,15 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    List <Widget>dummyposts = [for (int i = 0; i < 1000; i++) Container(color: Colors.blueGrey,height: 100,width: 100,)];
+    List<Widget> dummyposts = [
+      for (int i = 0; i < 1000; i++)
+        Container(
+          color: Colors.blueGrey,
+          height: 100,
+          width: 100,
+        )
+    ];
 
-    
     return Scaffold(
       body: Stack(
         children: [
@@ -20,11 +25,12 @@ class ProfileScreen extends StatelessWidget {
             right: 0,
             left: 0,
             bottom: size.height * 0.4,
-            child: SizedBox(
+            child: Container(
+                color: Colors.grey,
                 child: Image.asset(
-              'assets/man3oucha.jpg',
-              fit: BoxFit.contain,
-            )),
+                  ImagesManager.logo,
+                  fit: BoxFit.cover,
+                )),
           ),
           Positioned(
               top: size.height * 0.3,

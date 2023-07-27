@@ -36,15 +36,23 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> login() async {
     emit(LoginInitial());
     if (_checkInput()) return;
+
     emit(LoginLoading());
-    Either<Failure, void> result = await _loginUseCase.execute(
-        LoginUseCaseInput(
-            email: _emailController.text, password: _passwordController.text));
-    emit(
-      result.fold(
-        (failure) => LoginError(message: failure.failureMessage),
-        (userCred) => LoginLoaded(),
+
+    final Either<Failure, void> result = await _loginUseCase.execute(
+      LoginUseCaseInput(
+        email: _emailController.text,
+        password: _passwordController.text,
       ),
     );
+    // for the bad state error
+    if (!isClosed) {
+      emit(
+        result.fold(
+          (failure) => LoginError(message: failure.failureMessage),
+          (userCred) => LoginLoaded(),
+        ),
+      );
+    }
   }
 }

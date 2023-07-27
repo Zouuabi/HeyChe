@@ -7,7 +7,7 @@ class MyTextField extends StatefulWidget {
     super.key,
     required this.labelText,
     required this.errorMessage,
-    this.keyboardType,
+    required this.keyboardType,
     required this.icon,
     required this.controller,
     required this.hintText,
@@ -20,7 +20,7 @@ class MyTextField extends StatefulWidget {
   final String labelText;
   final String hintText;
   final TextEditingController controller;
-  final TextInputType? keyboardType;
+  final TextInputType keyboardType;
   final String errorMessage;
 
   @override

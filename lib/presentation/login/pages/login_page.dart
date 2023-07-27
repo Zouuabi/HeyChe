@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart' show showCupertinoModalPopup;
 import 'package:flutter/material.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:social_media_app/presentation/login/cubit/login_cubit.dart';
-import 'package:social_media_app/presentation/main/main_screen.dart';
-import 'package:social_media_app/presentation/register/pages/register_page.dart';
 import 'package:social_media_app/presentation/shared/widgets/text_field.dart';
 
+import '../../../config/routes/routes.dart';
 import '../../../core/utils/images_manager.dart';
 import '../../../core/utils/strings_manager.dart';
 import '../../../injector.dart';
@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
             child: BlocConsumer<LoginCubit, LoginState>(
               listener: (context, state) {
                 if (state is LoginLoaded) {
-                  Navigator.pushReplacementNamed(context, MainScreen.id);
+                  Navigator.pushReplacementNamed(context, Routes.main);
                 } else if (state is LoginError) {
                   showCupertinoModalPopup(
                       context: context,
@@ -63,6 +63,7 @@ class LoginPage extends StatelessWidget {
 
                             // email field
                             MyTextField(
+                              keyboardType: TextInputType.emailAddress,
                               isError: state is TextFieldEmpty &&
                                       state.status == StringsManager.email
                                   ? true
@@ -80,6 +81,7 @@ class LoginPage extends StatelessWidget {
                             const SizedBox(height: 20),
 
                             MyTextField(
+                              keyboardType: TextInputType.text,
                               isError: state is TextFieldEmpty &&
                                       state.status == StringsManager.password
                                   ? true
@@ -114,13 +116,19 @@ class LoginPage extends StatelessWidget {
                                 StandardTextButton(
                                   label: StringsManager.register,
                                   onPressed: () {
-                                    
                                     Navigator.pushReplacementNamed(
-                                        context, RegisterPage.id);
+                                        context, Routes.register);
                                   },
                                 )
                               ],
                             ),
+                            ElevatedButton(
+                                onPressed: () async {
+                                  await FirebaseAuth.instance
+                                      .sendPasswordResetEmail(
+                                          email: "zouabifoued8@gmail.com");
+                                },
+                                child: const Text('Reset Acount'))
                           ],
                         ),
                       );

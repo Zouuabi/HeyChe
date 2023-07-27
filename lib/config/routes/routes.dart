@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:social_media_app/presentation/login/pages/login_page.dart';
+import 'package:social_media_app/presentation/main/main_screen.dart';
 import 'package:social_media_app/presentation/register/pages/register_page.dart';
+
+import '../../injector.dart';
 
 class Routes {
   static const String splash = "/";
@@ -14,9 +17,19 @@ class Routes {
 
 Route<dynamic> unDefinedRoute() {
   return (MaterialPageRoute(builder: (_) {
-    return const Scaffold(
-      body: Center(
-        child: Text('404 !'),
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(
+              width: double.infinity, child: Center(child: Text('404 !'))),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(_, Routes.login);
+              },
+              child: const Text('Go Back'))
+        ],
       ),
     );
   }));
@@ -28,9 +41,13 @@ class RouteGenerator {
       case Routes.splash:
         return MaterialPageRoute(builder: (_) => const Placeholder());
       case Routes.login:
+        initLoginModule();
         return MaterialPageRoute(builder: (_) => LoginPage());
       case Routes.register:
-        return MaterialPageRoute(builder: (_) => RegisterPage());
+        initRegisterModule();
+        return MaterialPageRoute(builder: (_) => const RegisterPage());
+      case Routes.main:
+        return MaterialPageRoute(builder: (_) => MainScreen());
       default:
         return unDefinedRoute();
     }

@@ -1,14 +1,14 @@
+import 'package:flutter/material.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:flutter/material.dart';
+import 'package:social_media_app/config/routes/routes.dart';
 import 'package:social_media_app/config/themes/themes.dart';
-import 'package:social_media_app/data/data_source/remote_data_source/firebase_auth.dart';
 
+import 'core/utils/strings_manager.dart';
 import 'injector.dart';
 import 'presentation/login/pages/login_page.dart';
-import 'presentation/register/pages/register_page.dart';
 import 'presentation/main/main_screen.dart';
-import 'core/utils/strings_manager.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -16,13 +16,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        
         debugShowCheckedModeBanner: false,
         title: StringsManager.appName,
         theme: applicationTheme(),
         home: StreamBuilder(
           // TODO: seperate myapp root logic and firebase auth persistence
           stream: FirebaseAuth.instance.userChanges(),
-          builder: (context, snapshot) {
+          builder: (context, snapshot) {            
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
                 return MainScreen();
@@ -42,16 +43,7 @@ class MyApp extends StatelessWidget {
             }
           },
         ),
-        routes: {
-          LoginPage.id: (context) {
-            return LoginPage();
-          },
-          RegisterPage.id: (context) {
-            initRegisterModule();
-            return RegisterPage();
-          },
-          MainScreen.id: (context) => MainScreen(),
-        });
+        onGenerateRoute: RouteGenerator.getRoute);
   }
 }
 
