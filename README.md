@@ -40,6 +40,6 @@ Contributions are what make the open-source community such an amazing place to l
 
 ## Contact
 
-Your Name - contact@oubeid.com
+Oubeid Zouabi - contact@oubeid.com
 Project Link: https://github.com/Zouuabi/HeyChe/HeyChe
 
